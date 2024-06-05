@@ -15,10 +15,11 @@ export default function Login() {
 
   useEffect(() => {
     (async function () {
-      const { text } = await (await fetch(`/api/Login`)).json();
-      setData(text);
+      const { message } = await (await fetch(`/api/Login`)).json();
+      console.log(message);
+      setData(message);
     })();
-  });
+  }, []);
 
   async function handleLogin() {
     setisSubmitted(true);
@@ -78,7 +79,7 @@ export default function Login() {
             <KeyRound className="mr-2" /> Login
           </Button>
         </div>
-        <div>{data}</div>
+        <div>The data is: {data}</div>
       </div>
     </div>
   );

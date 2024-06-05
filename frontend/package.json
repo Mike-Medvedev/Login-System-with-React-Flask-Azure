@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "engines": {
-    "node": ">=20.14.0"
+    "node": ">=18.0"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.0.2",

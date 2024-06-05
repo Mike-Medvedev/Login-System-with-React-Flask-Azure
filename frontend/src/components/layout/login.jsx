@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import reactLogo from '../../assets/react.svg';
 import '../../App.css';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,15 @@ export default function Login() {
   const [serverResponse, setServerResponse] = useState('');
   const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    (async function () {
+      const { text } = await (await fetch(`/api/Login`)).json();
+      setData(text);
+    })();
+  });
 
   async function handleLogin() {
     setisSubmitted(true);
@@ -69,7 +78,7 @@ export default function Login() {
             <KeyRound className="mr-2" /> Login
           </Button>
         </div>
-        <div>{serverResponse}</div>
+        <div>{data}</div>
       </div>
     </div>
   );

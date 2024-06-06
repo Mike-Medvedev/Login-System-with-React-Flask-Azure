@@ -80,6 +80,16 @@ export default function Login() {
           </Button>
         </div>
         <div>The data is: {data}</div>
+        <Button
+          id="list"
+          onClick={async () => {
+            const endpoint = '/data-api/rest/Person';
+            const response = await fetch(endpoint);
+            const data = await response.json();
+            console.table(data.value);
+          }}>
+          List
+        </Button>
       </div>
     </div>
   );

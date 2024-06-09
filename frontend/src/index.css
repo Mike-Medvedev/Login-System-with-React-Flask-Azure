@@ -28,6 +28,9 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
+    --success: 120 61% 60%; /* HSL for a lighter green color */
+    --success-foreground: 210 40% 98%; /* HSL for a very light color, suitable for text on a green background */
+
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;

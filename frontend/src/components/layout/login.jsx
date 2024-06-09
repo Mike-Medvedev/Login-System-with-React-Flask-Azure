@@ -17,7 +17,7 @@ export default function Login() {
 
   async function handleLogin() {
     console.log('yo');
-    const response = await fetch('http://localhost:7071/api/Login');
+    const response = await fetch('https://react-az-login-func.azurewebsites.net/api/login');
     const result = await response.json();
     console.log(result);
     setData(result);

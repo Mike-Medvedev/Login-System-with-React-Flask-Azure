@@ -5,23 +5,17 @@ import { Button } from '@/components/ui/button';
 import { KeyRound } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import useLogin from '../../hooks/useLogin.js';
 
 export default function Login() {
   const [isSubmitted, setisSubmitted] = useState(false);
   const [form, setForm] = useState({});
   const [data, setData] = useState([]);
+  const { handleLogin } = useLogin();
 
   // useEffect(() => {
-  //   console.table(form);
+  //   console.log(form);
   // }, [form]);
-
-  async function handleLogin() {
-    console.log('yo');
-    const response = await fetch('https://react-az-login-func.azurewebsites.net/api/login');
-    const result = await response.json();
-    console.log(result);
-    setData(result);
-  }
 
   function handleInput(event) {
     setForm({
@@ -31,48 +25,30 @@ export default function Login() {
   }
 
   return (
-    <div className="m-3 flex h-6/12 max-w-fit md:w-5/12 xl:w-4/12 flex-col justify-start rounded border-2 border-gray-500 p-2">
-      <div className="mt-5 mb-6 flex justify-center object-contain">
+    <div className=" w-2/3 md:w-1/3 lg:w-2/6 xl:w-1/4  xl:h-3/6 flex flex-col gap-2 justify-evenly place-items-center  border-2 p-3 border-gray-800 rounded-lg overflow-hidden">
+      <div className="">
         <img src={reactLogo} className={`h-20 p-2 ${isSubmitted && 'logo'}`} alt="React logo" />
       </div>
-      <div className="flex flex-1 flex-col items-center gap-5">
-        <div>
-          <Label htmlFor="name">Username: </Label>
-          <Input type="text" name="username" placeholder="Enter username" onChange={handleInput} />
-        </div>
-        <div>
-          <Label htmlFor="pass">Password: </Label>
-          <Input
-            type="password"
-            name="password"
-            placeholder="Enter password"
-            onChange={handleInput}
-          />
-        </div>
-        <div className="flex flex-1 flex-col justify-center mt-10">
-          <Button onClick={handleLogin}>
-            <KeyRound className="mr-2" /> Login
-          </Button>
-        </div>
-        <div className="text-center">
-          data is:
-          <table className="flex flex-row">
-            {data.map((key, index) => {
-              return Object.entries(key).map((value, index2) => {
-                return (
-                  <tbody key={index2}>
-                    <tr>
-                      <td>{value[0]}</td>
-                    </tr>
-                    <tr>
-                      <td>{value[1]}</td>
-                    </tr>
-                  </tbody>
-                );
-              });
-            })}
-          </table>
-        </div>
+      <div>
+        <Label htmlFor="name">Username: </Label>
+        <Input type="text" name="username" placeholder="Enter username" onChange={handleInput} />
+      </div>
+      <div>
+        <Label htmlFor="pass">Password: </Label>
+        <Input
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          onChange={handleInput}
+        />
+      </div>
+      <div className="">
+        <Button
+          onClick={() => {
+            handleLogin(form);
+          }}>
+          <KeyRound className="mr-2" /> Login
+        </Button>
       </div>
     </div>
   );

@@ -1,0 +1,5 @@
+/node_modules
+/api
+/swa-db-connections
+**/.env
+.env

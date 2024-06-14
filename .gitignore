@@ -1,5 +1,16 @@
+.DS_STORE
+# Ignore node_modules directory
 /node_modules
+frontend/node_modules
+
+# Ignore api directory
 /api
+
+# Ignore swa-db-connections directory
 /swa-db-connections
+
+# Ignore all .env files
 **/.env
 .env
+
+.vscode

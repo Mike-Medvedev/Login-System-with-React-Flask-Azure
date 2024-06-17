@@ -9,6 +9,7 @@ import { loginLoader } from './loaders/loaders.js';
 import { Provider } from 'react-redux';
 import store from './state/store.js';
 import { Toaster } from '@/components/ui/toaster';
+import Home from '@/components/layout/home.jsx';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,11 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     loader: loginLoader,
+  },
+  {
+    path: '/home',
+    element: <Home />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

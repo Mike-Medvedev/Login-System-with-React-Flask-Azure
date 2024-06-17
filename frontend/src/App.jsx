@@ -13,7 +13,7 @@ export default function App() {
     console.log('yo', data, e);
 
     signUp ? handleSignup(data) : handleLogin(data);
-    setIsSubmitted(true); // Optionally set a submitted state
+    setIsSubmitted(true);
   }
 
   return (

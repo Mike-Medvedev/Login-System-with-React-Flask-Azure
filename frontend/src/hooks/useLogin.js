@@ -42,7 +42,7 @@ const useLogin = signup => {
       },
     };
     try {
-      const response = await fetch('http://127.0.0.1:5000/login', options);
+      const response = await fetch('https://flask-login-server.azurewebsites.net/login', options);
       const result = await response.json();
 
       console.log(response.ok);
@@ -69,7 +69,7 @@ const useLogin = signup => {
       },
     };
     try {
-      const response = await fetch('http://127.0.0.1:5000/signup', options);
+      const response = await fetch('https://flask-login-server.azurewebsites.net/signup', options);
       if (response.ok) {
         setLoginStatus(true);
       } else if (response.status == 409) {

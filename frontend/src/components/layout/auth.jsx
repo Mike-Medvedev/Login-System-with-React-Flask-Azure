@@ -1,27 +1,17 @@
-import { useState } from 'react';
-import '../../App.css';
-import useLogin from '../../hooks/useLogin.js';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Label } from '../ui/label';
+import { Link } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { KeyRound } from 'lucide-react';
+import { Label } from '../ui/label';
 
-export default function Login() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const { handleLogin } = useLogin();
+const AuthForm = ({ onSubmit, buttonText, linkText, setSignup }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  function onSubmit(data, e) {
-    console.log('yo', data, e);
-    handleLogin(data);
-    setIsSubmitted(true); // Optionally set a submitted state
-  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2 place-items-center">
@@ -44,7 +34,7 @@ export default function Login() {
         <Input
           className={errors.password?.type && 'border-red-600'}
           type="password"
-          {...register('password', { required: true })}
+          {...register('password', { required: 'Password required' })}
           placeholder="Enter password"
         />
         {errors.password?.type === 'required' && (
@@ -54,15 +44,15 @@ export default function Login() {
         )}
       </div>
       <div className="flex gap-2">
-        <div className="flex gap-2">
-          <Button type="submit">
-            <KeyRound className="mr-2" /> Submit
-          </Button>
-          <Link to={'/signup'}>
-            <Button>Signup</Button>
-          </Link>
-        </div>
+        <Button type="submit">
+          <KeyRound className="mr-2" /> {buttonText}
+        </Button>
+        <Button onClick={() => setSignup(prev => !prev)} type="button">
+          <KeyRound className="mr-2" /> {linkText}
+        </Button>
       </div>
     </form>
   );
-}
+};
+
+export default AuthForm;

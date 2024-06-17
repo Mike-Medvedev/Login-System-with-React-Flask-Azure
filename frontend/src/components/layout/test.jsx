@@ -5,6 +5,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { validTypes } from '@/shared/validTypes';
 import { Info } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useParams } from 'react-router-dom';
 
 export default function Test() {
   const [inputValue, setInputValue] = useState('');
@@ -16,6 +17,7 @@ export default function Test() {
   const [isMatch, setIsMatch] = useState(true);
   const [displayText, setDisplayText] = useState(0);
   const [textStrings, setTextStrings] = useState([]);
+  let { userId } = useParams();
 
   const { toast, dismiss } = useToast();
 
@@ -118,6 +120,7 @@ export default function Test() {
     <div>
       <Button onClick={() => handleFlask()}>Get From Flask</Button>
       <div>{JSON.stringify(data)}</div>
+      <div>The user id is: {userId}</div>
     </div>
   );
 }

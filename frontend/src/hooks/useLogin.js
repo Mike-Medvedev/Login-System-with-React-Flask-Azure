@@ -1,26 +1,31 @@
 import { useState, useEffect } from 'react';
 import { useToast } from '@/components/ui/use-toast';
-const useLogin = () => {
-  const { toast } = useToast();
+import { cn } from '@/lib/utils';
+const useLogin = signup => {
+  const { toast, dismiss } = useToast();
   const [loginStatus, setLoginStatus] = useState(null);
 
   useEffect(() => {
-    if (loginStatus == true) {
-      toast({
-        variant: 'success',
-        title: '',
-        description: 'Login Success!',
+    if (loginStatus !== null) {
+      const variant = loginStatus ? 'success' : 'destructive';
+      const status = signup
+        ? loginStatus
+          ? 'Sign Up Success'
+          : 'Sign Up Failed'
+        : loginStatus
+        ? 'Login Success'
+        : 'Login Failed';
+      const t = toast({
+        className: cn('top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4'),
+        variant: variant,
+        title: status,
       });
-    }
-    if (loginStatus == false) {
-      toast({
-        variant: 'destructive',
-        title: '',
-        description: 'Login Failed!',
-      });
+      setTimeout(() => {
+        dismiss(t.id);
+      }, 2000);
     }
     setLoginStatus(null);
-  }, [loginStatus]);
+  }, [loginStatus, signup]);
 
   const handleLogin = async form => {
     const options = {
@@ -32,15 +37,41 @@ const useLogin = () => {
     };
     try {
       const response = await fetch('http://127.0.0.1:5000/login', options);
-      const result = await response.json();
-      setLoginStatus(true);
+      console.log(response.ok);
+
+      if (response.ok) {
+        setLoginStatus(true);
+      } else {
+        setLoginStatus(false);
+      }
     } catch (error) {
       console.error(error);
       setLoginStatus(false);
     }
   };
 
-  return { handleLogin };
+  const handleSignup = async form => {
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(form),
+      headers: {
+        'content-type': 'application/json',
+      },
+    };
+    try {
+      const response = await fetch('http://127.0.0.1:5000/signup', options);
+      if (response.ok) {
+        setLoginStatus(true);
+      } else {
+        setLoginStatus(false);
+      }
+    } catch (error) {
+      console.error(error);
+      setLoginStatus(false);
+    }
+  };
+
+  return { handleLogin, handleSignup };
 };
 
 export default useLogin;

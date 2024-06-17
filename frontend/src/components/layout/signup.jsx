@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../../App.css';
 import useLogin from '../../hooks/useLogin.js';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { KeyRound } from 'lucide-react';
 
-export default function Login() {
+export default function Signup() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { handleLogin } = useLogin();
   const {
@@ -58,8 +58,8 @@ export default function Login() {
           <Button type="submit">
             <KeyRound className="mr-2" /> Submit
           </Button>
-          <Link to={'/signup'}>
-            <Button>Signup</Button>
+          <Link to={'/'}>
+            <Button>Back</Button>
           </Link>
         </div>
       </div>

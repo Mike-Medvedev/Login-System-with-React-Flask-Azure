@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import store from './state/store.js';
 import { Toaster } from '@/components/ui/toaster';
 import Home from '@/components/layout/home.jsx';
+import LoginGuard from './components/layout/loginGuard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,8 +21,16 @@ const router = createBrowserRouter([
   },
   {
     path: '/home',
-    element: <Home />,
+    element: (
+      <LoginGuard>
+        <Home />,
+      </LoginGuard>
+    ),
     errorElement: <ErrorPage />,
+  },
+  {
+    path: '/unauthorized',
+    element: <Test />,
   },
 ]);
 

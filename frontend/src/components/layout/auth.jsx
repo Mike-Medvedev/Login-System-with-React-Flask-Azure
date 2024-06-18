@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { KeyRound } from 'lucide-react';
 import { Label } from '../ui/label';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout } from '@/state/slices/authSlice';
+import LoadingSpinner from './loadingSpinner';
 
 const AuthForm = ({ onSubmit, buttonText, linkText, setSignup }) => {
+  const isAuth = useSelector(store => store.auth.isAuth);
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  return (
+  return isAuth ? (
+    <LoadingSpinner />
+  ) : (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2 place-items-center">
       <div>
         <Label htmlFor="username">Username: </Label>

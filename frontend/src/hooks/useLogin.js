@@ -2,11 +2,15 @@ import { useState, useEffect } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout } from '@/state/slices/authSlice';
 const useLogin = signup => {
   const { toast, dismiss } = useToast();
   const [loginStatus, setLoginStatus] = useState(null);
   const [is409, setIs409] = useState(false);
   let navigate = useNavigate();
+  const isAuth = useSelector(store => store.auth.isAuth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (loginStatus !== null) {
@@ -42,19 +46,19 @@ const useLogin = signup => {
       },
     };
     try {
-      const response = await fetch('https://flask-login-server.azurewebsites.net/login', options);
+      dispatch(login());
+      const response = await fetch('http://localhost:5000/login', options);
       const result = await response.json();
 
-      console.log(response.ok);
-
       if (response.ok) {
-        console.log(result.access_token);
         localStorage.setItem('access_token', result.access_token);
         setLoginStatus(true);
       } else {
+        dispatch(logout());
         setLoginStatus(false);
       }
     } catch (error) {
+      dispatch(logout());
       console.error(error);
       setLoginStatus(false);
     }
@@ -69,16 +73,21 @@ const useLogin = signup => {
       },
     };
     try {
-      const response = await fetch('https://flask-login-server.azurewebsites.net/signup', options);
+      dispatch(login());
+      const response = await fetch('http://localhost:5000/signup', options);
       if (response.ok) {
+        dispatch(logout());
         setLoginStatus(true);
       } else if (response.status == 409) {
+        dispatch(logout());
         setIs409(true);
         setLoginStatus(false);
       } else {
+        dispatch(logout());
         setLoginStatus(false);
       }
     } catch (error) {
+      dispatch(logout());
       console.error(error);
       setLoginStatus(false);
     }

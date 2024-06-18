@@ -1,7 +1,16 @@
 {
   "routes": [
     {
-      "route": "/*.js"
+      "route": "/home",
+      "rewrite": "/index.html"
+    },
+    {
+      "route": "/another-route",
+      "rewrite": "/index.html"
+    },
+    {
+      "route": "/*",
+      "rewrite": "/index.html"
     }
   ],
   "mimeTypes": {

@@ -7,10 +7,6 @@
     {
       "route": "/home",
       "rewrite": "/index.html"
-    },
-    {
-      "route": "/*",
-      "rewrite": "/index.html"
     }
   ]
 }

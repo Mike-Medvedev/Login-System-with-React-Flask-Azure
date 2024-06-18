@@ -9,10 +9,6 @@
       "rewrite": "/index.html"
     },
     {
-      "route": "/another-route",
-      "rewrite": "/index.html"
-    },
-    {
       "route": "/*",
       "rewrite": "/index.html"
     }

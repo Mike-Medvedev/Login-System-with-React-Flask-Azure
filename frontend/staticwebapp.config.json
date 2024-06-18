@@ -1,4 +1,8 @@
 {
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/*.css", "/*.js", "/*.png", "/*.jpg", "/*.svg", "/*.ico", "/static/*", "/assets/*"]
+  },
   "routes": [
     {
       "route": "/home",
@@ -12,9 +16,5 @@
       "route": "/*",
       "rewrite": "/index.html"
     }
-  ],
-  "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": ["/*.css", "/*.js", "/*.png", "/*.jpg", "/*.svg", "/*.ico", "/static/*"]
-  }
+  ]
 }

@@ -1,6 +1,6 @@
 export async function loginLoader() {
   try {
-    const response = await fetch('http://localhost:5000');
+    const response = await fetch('https://flask-login-server.azurewebsites.net');
     const data = await response.json();
     return data;
   } catch (error) {

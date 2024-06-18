@@ -15,7 +15,7 @@ export const validateTokenAsync = createAsyncThunk('auth/validateTokenAsync', as
       },
     };
 
-    const response = await fetch('http://localhost:5000/verify', options);
+    const response = await fetch('https://flask-login-server.azurewebsites.net/verify', options);
 
     if (response.ok) {
       console.log('verification is good');

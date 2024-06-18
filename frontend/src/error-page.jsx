@@ -5,8 +5,8 @@ export default function ErrorPage() {
   console.error(error);
   return (
     <div>
-      <strong>ERROR </strong>
-      <i>{error.statusText || error.message}</i>
+      <strong>ERROR UNAUTHORIZED</strong>
+      <i>{error}</i>
     </div>
   );
 }

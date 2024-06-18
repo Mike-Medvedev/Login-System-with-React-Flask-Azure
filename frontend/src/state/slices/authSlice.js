@@ -27,13 +27,13 @@ const authSlice = createSlice({
       .addCase(validateTokenAsync.fulfilled, state => {
         state.isValidatingToken = false;
         state.isValidToken = true;
-        state.isAuthenticated = true;
+        state.isAuth = true;
         state.error = null;
       })
       .addCase(validateTokenAsync.rejected, (state, action) => {
         state.isValidatingToken = false;
         state.isValidToken = false;
-        state.isAuthenticated = false;
+        state.isAuth = false;
         state.error = action.error.message;
       });
   },

@@ -12,14 +12,23 @@ export default function LoginGuard({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('isValidToken: in effect', isValidToken);
+    console.log('Dispatching token validation');
     dispatch(validateTokenAsync());
-  }, [dispatch, isValidToken]);
+  }, []);
+
+  console.log('isValidToken:', isValidToken);
+  console.log(error);
 
   if (isValidatingToken) {
     return <LoadingSpinner />;
-  } else if (isAuth && isValidToken) {
+  }
+  if (isValidToken) {
     return children;
-  } else if (error) {
-    return <Navigate to="/unauthorized" />;
+  }
+  if (error) {
+    return <Navigate to={'/unauthorized'} />;
+  } else {
+    return <></>;
   }
 }

@@ -30,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/unauthorized',
-    element: <Test />,
+    element: <ErrorPage />,
   },
 ]);
 

@@ -19,7 +19,6 @@ export const validateTokenAsync = createAsyncThunk('auth/validateTokenAsync', as
 
     if (response.ok) {
       console.log('verification is good');
-      return true;
     } else {
       throw new Error('Error verifying token');
     }

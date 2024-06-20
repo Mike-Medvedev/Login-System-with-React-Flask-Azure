@@ -68,11 +68,12 @@ export default function Crud({ operation, text, selectedGuitarId, setData, scrol
       }
       case 'UPDATE': {
         const update = await fetch(
-          `https://flask-login-server.azurewebsites.net/${selectedGuitarId}`,
+          `https://flask-login-server.azurewebsites.net/update/${selectedGuitarId}`,
           {
             method: 'PUT',
             headers: {
               Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+              'Content-type': 'application/json',
             },
             body: JSON.stringify(data),
           },

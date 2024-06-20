@@ -114,7 +114,7 @@ export default function Home() {
           </div>
         </div>
         <div className=" text-center text-2xl font-bold">
-          Select a crud operation and then click submit
+          Select a <strong>CRUD</strong> operation and then click submit
         </div>
         <Crud
           operation={operation}

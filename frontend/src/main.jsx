@@ -17,7 +17,6 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
-    loader: loginLoader,
   },
   {
     path: '/home',
@@ -27,6 +26,7 @@ const router = createBrowserRouter([
       </LoginGuard>
     ),
     errorElement: <ErrorPage />,
+    loader: loginLoader,
   },
   {
     path: '/unauthorized',

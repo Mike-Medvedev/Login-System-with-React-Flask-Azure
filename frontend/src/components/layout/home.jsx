@@ -113,6 +113,9 @@ export default function Home() {
             </Button>
           </div>
         </div>
+        <div className=" text-center text-2xl font-bold">
+          Select a crud operation and then click submit
+        </div>
         <Crud
           operation={operation}
           text={text}

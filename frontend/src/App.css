@@ -41,3 +41,20 @@ td {
     animation: logo-spin infinite 20s linear;
   }
 }
+
+@keyframes flash {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+/* Apply the animation to the text element */
+.flash-text {
+  animation: flash 1s infinite;
+}

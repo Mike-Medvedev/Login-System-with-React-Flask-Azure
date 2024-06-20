@@ -7,13 +7,14 @@ import { useEffect, useRef, useState } from 'react';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { useForm } from 'react-hook-form';
+import Crud from './crud';
 export default function Home() {
   const dispatch = useDispatch();
   const { user_data, guitar_data } = useLoaderData();
+  const [operation, setOperation] = useState('');
   const [guitars, setGuitars] = useState(guitar_data.data);
-  const [isHidden, setisHidden] = useState(false);
-  const [currId, setCurrId] = useState(null);
-  const [selected, isSelected] = useState(null);
+  const [selectedGuitarId, setSelectedGuitarId] = useState(null);
+  const [text, setText] = useState('');
   const {
     register,
     handleSubmit,
@@ -21,33 +22,6 @@ export default function Home() {
   } = useForm();
 
   const scrollRef = useRef(null);
-  const rowRef = useRef(null);
-
-  async function onSubmit(data, event) {
-    console.log(data);
-
-    const response = await fetch('http://localhost:5000/create', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      const refetch = await fetch('http://127.0.0.1:5000/guitars', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        },
-      });
-
-      const result = await refetch.json();
-      setGuitars(result.data);
-    }
-  }
-
-  async function deleteGuitar() {}
 
   return (
     <>
@@ -81,60 +55,56 @@ export default function Home() {
                 <th className="text-xl font-serif font-bold">Year</th>
               </tr>
             </thead>
-            <tbody className="">
-              {guitars.map((innerGuitarArray, index) => (
-                <tr
-                  key={index}
-                  // className={rowRef.current=== index && 'bg-slate-200'}
-                  ref={rowRef}>
-                  {innerGuitarArray.map((guitarField, innerIndex) => (
-                    <td
-                      className="text-center cursor-pointer focus:bg-slate-500"
-                      key={`${innerIndex}-${index}`}>
-                      {guitarField}
-                    </td>
-                  ))}
-                </tr>
-              ))}
+            <tbody>
+              {guitars.map((innerGuitarArray, index) => {
+                return (
+                  <tr
+                    key={index}
+                    id={innerGuitarArray[0]}
+                    className={selectedGuitarId === innerGuitarArray[0] ? 'bg-slate-200' : ''}
+                    onClick={() => setSelectedGuitarId(innerGuitarArray[0])}>
+                    {innerGuitarArray.slice(1).map((guitarField, innerIndex) => (
+                      <td
+                        className="text-center cursor-pointer focus:bg-slate-500"
+                        key={`${innerIndex}-${index}`}>
+                        {/* <input placeholder={guitarField} className="placeholder:text-black" /> */}
+                        {guitarField}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
-          {/* <div className="flex flex-col justify-around gap-4  overflow-auto">
-            {guitars.map((innerGuitarArray, index) => (
-              <div className="flex flex-row w-full gap-4 justify-around">
-                {innerGuitarArray.map((guitarField, innerIndex) => (
-                  <div className="cursor-pointer focus:bg-slate-500" key={`${innerIndex}-${index}`}>
-                    {guitarField}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div> */}
         </div>
         <div className="flex justify-evenly">
           <div>
             <Button
               onClick={() => {
-                setisHidden(prev => !prev);
+                setText('Creating new record');
+                setOperation('CREATE');
               }}>
               Create
             </Button>
           </div>
           <div>
-            <Button>Read</Button>
+            <Button onClick={() => setOperation('READ')}>Read</Button>
           </div>
           <div>
             <Button
               onClick={() => {
-                setisHidden(prev => !prev);
+                setOperation('UPDATE');
+                setText('Updating Selected record');
               }}>
               Update
             </Button>
           </div>
           <div>
             <Button
-              onClick={e => {
+              onClick={() => {
+                setOperation('DELETE');
                 // deleteGuitar(id);
-                setGuitars(prev => prev.slice(0, -1));
+                // setGuitars(prev => prev.slice(0, -1));
                 if (scrollRef.current) {
                   scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
                 }
@@ -143,29 +113,41 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <div className={`flex border-2 border-black rounded-md p-1 ${isHidden && 'hidden'}`}>
-          <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2 justify-around w-full p-2">
-            <div>
-              <Label>Brand: </Label>
-              <Input {...register('brand')}></Input>
-            </div>
-            <div>
-              <Label>Model: </Label>
-              <Input {...register('model')}></Input>
-            </div>
-            <div>
-              <Label>Color: </Label>
-              <Input {...register('color')}></Input>
-            </div>
-            <div>
-              <Label>Year: </Label>
-              <Input type="number" {...register('year')}></Input>
-            </div>
-            <div className="flex flex-col justify-end">
-              <Button>Submit</Button>
-            </div>
-          </form>
-        </div>
+        <Crud
+          operation={operation}
+          text={text}
+          selectedGuitarId={selectedGuitarId}
+          setData={setGuitars}
+          scrollRef={scrollRef}
+        />
+        {/* <div className={`flex flex-col ${isHidden && 'hidden'} `}>
+          <div className="flash-text text-green-600 text-2xl font-bold">Creating new record</div>
+          <div className="flex border-2 border-black rounded-md p-1">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex gap-2 justify-around w-full p-2">
+              <div>
+                <Label>Brand: </Label>
+                <Input {...register('brand')}></Input>
+              </div>
+              <div>
+                <Label>Model: </Label>
+                <Input {...register('model')}></Input>
+              </div>
+              <div>
+                <Label>Color: </Label>
+                <Input {...register('color')}></Input>
+              </div>
+              <div>
+                <Label>Year: </Label>
+                <Input type="number" {...register('year')}></Input>
+              </div>
+              <div className="flex flex-col justify-end">
+                <Button>Submit</Button>
+              </div>
+            </form>
+          </div>
+        </div> */}
       </div>
     </>
   );

@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.italic {
+  font-style: italic;
+}
+
 td {
   padding: 1rem;
   border: 1px solid black;
@@ -57,4 +61,46 @@ td {
 /* Apply the animation to the text element */
 .flash-text {
   animation: flash 1s infinite;
+}
+
+.delete-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(17, 32, 61, 0.7); Semi-transparent black veil */
+  background-color: rgba(75, 72, 72, 0.9); /* Semi-transparent black veil */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hovered .delete-overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.jiggle:hover {
+  animation: jiggle 0.15s ease-in-out 2;
+}
+
+@keyframes jiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }

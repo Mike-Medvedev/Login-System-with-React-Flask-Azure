@@ -8,6 +8,9 @@ import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { useForm } from 'react-hook-form';
 import Crud from './crud';
+import { CircleFadingPlus, SquarePen, Trash2 } from 'lucide-react';
+import DataTable from './data-table';
+import Welcome from './welcome';
 export default function Home() {
   const dispatch = useDispatch();
   const { user_data, guitar_data } = useLoaderData();
@@ -15,6 +18,9 @@ export default function Home() {
   const [guitars, setGuitars] = useState(guitar_data.data);
   const [selectedGuitarId, setSelectedGuitarId] = useState(null);
   const [text, setText] = useState('');
+  const [editModeIndex, setEditModeIndex] = useState(null);
+  const [hoveredRowIndex, setHoveredRowIndex] = useState(null);
+  const [isDeleteMode, setIsDeleteMode] = useState(false);
   const {
     register,
     handleSubmit,
@@ -26,58 +32,12 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col w-full h-full p-3 gap-2">
-        <div className="flex justify-center border-2 border-black rounded-md p-1">
-          <div>
-            <Link to={'/'}>
-              <Button
-                onClick={() => {
-                  dispatch(logout());
-                }}>
-                Logout
-              </Button>
-            </Link>
-          </div>
+        <Welcome />
+        <div className="h-2/3">
+          <DataTable />
         </div>
-        <div
-          ref={scrollRef}
-          className="flex flex-col align-items-center border-2 h-2/3 border-black rounded-md p-1 overflow-y-scroll relative">
-          <div className="text-center p-3 text-xl font-serif font-bold">
-            Welcome {user_data.message}
-          </div>
-          <div className="flex gap-4 w-full justify-around"></div>
 
-          <table>
-            <thead>
-              <tr>
-                <th className="text-xl font-serif font-bold">Brand</th>
-                <th className="text-xl font-serif font-bold">Model</th>
-                <th className="text-xl font-serif font-bold">Color</th>
-                <th className="text-xl font-serif font-bold">Year</th>
-              </tr>
-            </thead>
-            <tbody>
-              {guitars.map((innerGuitarArray, index) => {
-                return (
-                  <tr
-                    key={index}
-                    id={innerGuitarArray[0]}
-                    className={selectedGuitarId === innerGuitarArray[0] ? 'bg-slate-200' : ''}
-                    onClick={() => setSelectedGuitarId(innerGuitarArray[0])}>
-                    {innerGuitarArray.slice(1).map((guitarField, innerIndex) => (
-                      <td
-                        className="text-center cursor-pointer focus:bg-slate-500"
-                        key={`${innerIndex}-${index}`}>
-                        {/* <input placeholder={guitarField} className="placeholder:text-black" /> */}
-                        {guitarField}
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        <div className="flex justify-evenly">
+        {/* <div className="flex justify-evenly">
           <div>
             <Button
               onClick={() => {
@@ -88,7 +48,13 @@ export default function Home() {
             </Button>
           </div>
           <div>
-            <Button onClick={() => setOperation('READ')}>Read</Button>
+            <Button
+              onClick={() => {
+                setOperation('READ');
+                setText('Reading all records');
+              }}>
+              Read
+            </Button>
           </div>
           <div>
             <Button
@@ -103,8 +69,7 @@ export default function Home() {
             <Button
               onClick={() => {
                 setOperation('DELETE');
-                // deleteGuitar(id);
-                // setGuitars(prev => prev.slice(0, -1));
+                setText('Deleting selected record');
                 if (scrollRef.current) {
                   scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
                 }
@@ -115,7 +80,7 @@ export default function Home() {
         </div>
         <div className=" text-center text-2xl font-bold">
           Select a <strong>CRUD</strong> operation and then click submit
-        </div>
+        </div> */}
         <Crud
           operation={operation}
           text={text}

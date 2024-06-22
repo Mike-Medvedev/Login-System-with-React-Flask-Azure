@@ -1,16 +1,16 @@
-import { Audio } from 'react-loader-spinner';
+import { Blocks } from 'react-loader-spinner';
 
 export default function LoadingSpinner() {
   return (
     <div>
-      <Audio
+      <Blocks
         height="80"
         width="80"
-        radius="9"
-        color="blue"
-        ariaLabel="loading"
-        wrapperStyle
-        wrapperClass
+        color="#4fa94d"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        visible={true}
       />
     </div>
   );

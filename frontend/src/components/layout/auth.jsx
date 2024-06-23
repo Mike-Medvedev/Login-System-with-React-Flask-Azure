@@ -7,6 +7,19 @@ import { Label } from '../ui/label';
 import { useSelector } from 'react-redux';
 import LoadingSpinner from './loadingSpinner';
 
+/**
+ * @description Child component of App.jsx which takes props
+ * to specify whether its a sign up and login component
+ *
+ * @param {function} onSubmit determines whether submission button
+ * does a Login or Signup
+ * @param {string} buttonText determines whether button says login or signup
+ * @param {string} linkText determines whether link is signups
+ * or navigates back to login
+ * @param {function} setSignup setter function for boolean isSignup
+ * is user currently signing up or logging in?
+ */
+
 const AuthForm = ({ onSubmit, buttonText, linkText, setSignup }) => {
   const isAuth = useSelector(store => store.auth.isAuth);
 

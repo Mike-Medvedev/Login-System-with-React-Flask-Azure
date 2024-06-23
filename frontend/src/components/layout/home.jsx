@@ -3,6 +3,11 @@ import { useRef, useState } from 'react';
 import Crud from './crud';
 import DataTable from './data-table';
 import Welcome from './welcome';
+
+/**
+ * @description JWT Protected route, user lands here after login
+ * Parent component to Welcome and DataTable components
+ */
 export default function Home() {
   const { guitar_data } = useLoaderData();
   const [operation, setOperation] = useState('');

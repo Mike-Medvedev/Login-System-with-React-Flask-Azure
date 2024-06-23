@@ -6,6 +6,10 @@ import TableBody from './Datatable/tableBody';
 import AddEmptyRow from './Datatable/addEmptyRow';
 import { setDataSource } from '@/state/slices/dataTableSlice';
 
+/**
+ * @description Parent component of all data-table components
+ * @returns Data-table that contains rows of [brand, model, color ,year]
+ */
 export default function DataTable() {
   const { guitar_data } = useLoaderData();
   const dispatch = useDispatch();

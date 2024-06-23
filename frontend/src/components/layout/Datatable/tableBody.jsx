@@ -2,25 +2,14 @@ import { useState } from 'react';
 import RowOverlay from './rowOverlay';
 import SubmitFormChanges from './submitFormChanges';
 import EditModeForm from './editModeForm';
-import { useSelector, useDispatch } from 'react-redux';
-import { setRowState } from '@/state/slices/dataTableSlice';
-import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 export default function TableBody({ data }) {
-  const dispatch = useDispatch();
-  const rowState = useSelector(store => store.dataTable.rowState);
-  // const [rowState, setRowState] = useState([]);
+  const editModeBooleanArray = useSelector(store => store.dataTable.editModeBooleanArray);
   const [hoveredRowIndex, setHoveredRowIndex] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-  } = useForm();
-
   function renderEditModeSubmission(index) {
-    if (rowState[index]) {
+    if (editModeBooleanArray[index]) {
       return <SubmitFormChanges index={index} setIsSubmitted={setIsSubmitted} />;
     } else {
       return <></>;
@@ -28,7 +17,7 @@ export default function TableBody({ data }) {
   }
 
   function renderEditModeForm(innerGuitarArray, index) {
-    if (rowState[index]) {
+    if (editModeBooleanArray[index]) {
       return (
         <EditModeForm index={index} innerGuitarArray={innerGuitarArray} isSubmitted={isSubmitted} />
       );
@@ -53,7 +42,7 @@ export default function TableBody({ data }) {
             <div
               id="mainrow"
               className={` relative grid grid-cols-4 gap-x-8 p-3 rounded-md text-center shadow-md ${
-                hoveredRowIndex === index && !rowState[index] ? 'hovered' : ''
+                hoveredRowIndex === index && !editModeBooleanArray[index] ? 'hovered' : ''
               } `}
               onMouseOver={() => setHoveredRowIndex(index)}
               onMouseLeave={() => setHoveredRowIndex(null)}>

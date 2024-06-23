@@ -12,7 +12,6 @@ export async function loginLoader() {
       },
     });
     const guitar_data = await guitars.json();
-    console.log(guitar_data);
     return { user_data: user_data, guitar_data: guitar_data };
   } catch (error) {
     console.error('login loader error fetching', error);

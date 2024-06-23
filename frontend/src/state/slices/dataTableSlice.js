@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  rowState: [],
+  editModeBooleanArray: [],
   dataSource: [],
 };
 
@@ -9,12 +9,12 @@ const dataTableSlice = createSlice({
   name: 'dataTable',
   initialState,
   reducers: {
-    setRowState: (state, action) => {
+    seteditModeBooleanArray: (state, action) => {
       const index = action.payload;
-      state.rowState[index] = !state.rowState[index];
+      state.editModeBooleanArray[index] = !state.editModeBooleanArray[index];
     },
     setDataSource: (state, action) => {
-      state.dataSource = action.payload; // Correctly modify the draft state
+      state.dataSource = action.payload;
     },
     deleteSelectedRow: (state, action) => {
       const index = action.payload;
@@ -48,7 +48,12 @@ const dataTableSlice = createSlice({
   },
 });
 
-export const { setDataSource, setRowState, deleteSelectedRow, addSelectedRow, updateSelectedRow } =
-  dataTableSlice.actions;
+export const {
+  setDataSource,
+  seteditModeBooleanArray,
+  deleteSelectedRow,
+  addSelectedRow,
+  updateSelectedRow,
+} = dataTableSlice.actions;
 
 export default dataTableSlice.reducer;

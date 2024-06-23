@@ -1,14 +1,13 @@
 import { Input } from '@/components/ui/input';
-import { updateSelectedRow, setRowState } from '@/state/slices/dataTableSlice';
+import { updateSelectedRow, seteditModeBooleanArray } from '@/state/slices/dataTableSlice';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
-export default function EditModeForm({ index, innerGuitarArray, callback, isSubmitted }) {
+export default function EditModeForm({ index, innerGuitarArray, isSubmitted }) {
   const dispatch = useDispatch();
   const {
     register,
-    handleSubmit,
     trigger,
     formState: { errors },
     getValues,
@@ -17,7 +16,7 @@ export default function EditModeForm({ index, innerGuitarArray, callback, isSubm
   useEffect(() => {
     trigger();
     dispatch(updateSelectedRow({ index: index, data: getValues() }));
-    dispatch(setRowState(index));
+    dispatch(seteditModeBooleanArray(index));
   }, [isSubmitted]);
 
   return (

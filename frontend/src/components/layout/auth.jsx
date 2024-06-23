@@ -26,7 +26,7 @@ const AuthForm = ({ onSubmit, buttonText, linkText, setSignup }) => {
       <div>
         <Label htmlFor="username">Username: </Label>
         <Input
-          className={errors.username?.type && 'border-red-600'}
+          className={`${errors.username?.type && 'border-red-600'} border-black`}
           {...register('username', { required: 'Username required' })}
           type="text"
           placeholder="Enter username"
@@ -40,7 +40,7 @@ const AuthForm = ({ onSubmit, buttonText, linkText, setSignup }) => {
       <div>
         <Label htmlFor="password">Password: </Label>
         <Input
-          className={errors.password?.type && 'border-red-600'}
+          className={`${errors.password?.type && 'border-red-600'} border-black`}
           type="password"
           {...register('password', { required: 'Password required' })}
           placeholder="Enter password"

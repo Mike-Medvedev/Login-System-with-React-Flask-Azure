@@ -31,7 +31,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col w-full h-full p-3 gap-2">
+      <div className="flex flex-col w-full h-full p-3 gap-2 bg-slate-200">
         <Welcome />
         <div className="h-2/3">
           <DataTable />

@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Raleway';
+  src: url('assets/fonts/Raleway-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('assets/fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -75,5 +89,6 @@
   }
   body {
     @apply bg-background text-foreground w-full h-full;
+    font-family: 'Raleway', sans-serif; /* Apply the Raleway font */
   }
 }

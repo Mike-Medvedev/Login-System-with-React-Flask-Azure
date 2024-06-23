@@ -4,8 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #333333;
 }
-
 .logo {
   cursor: pointer;
 }
@@ -14,6 +14,13 @@
   font-style: italic;
 }
 
+div.grid > div:nth-child(odd) > #mainrow {
+  background-color: #f0f0f0; /* Warm gray */
+}
+
+div.grid > div:nth-child(even) > #mainrow {
+  background-color: #ecf0f1; /* Light blue-gray */
+}
 td {
   padding: 1rem;
   border: 1px solid black;
@@ -76,6 +83,7 @@ td {
   align-items: center;
   opacity: 0;
   pointer-events: none;
+  border-radius: 6px;
 }
 
 .hovered .delete-overlay {

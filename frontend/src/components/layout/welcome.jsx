@@ -27,7 +27,7 @@ export default function Welcome() {
 
   const scrollRef = useRef(null);
   return (
-    <div className="flex border-2 border-black rounded-md p-1 relative">
+    <div className="flex border-bottom-2 border-b-2 border-slate-700 p-1 relative">
       <div className="">
         <Link to={'/'}>
           <Button
@@ -39,7 +39,7 @@ export default function Welcome() {
         </Link>
       </div>
       <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-        <div className="text-center text-xl font-serif font-bold">Welcome {user_data.message}</div>
+        <div className="text-center text-xl  font-bold">Welcome {user_data.message}</div>
       </div>
     </div>
   );

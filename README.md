@@ -23,6 +23,6 @@ Hosted with:
 Azure Static Web App
 
 Server Deployed on:
-Azure Web App (App server)
+Azure Web App (App service)
 
 

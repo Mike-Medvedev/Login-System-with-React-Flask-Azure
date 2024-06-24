@@ -6,7 +6,7 @@ export default function FormSubmission() {
 
   async function submitFormData() {
     try {
-      const update = await fetch(`https://proud-wave-0105b8f0f.5.azurestaticapps.net/update`, {
+      const update = await fetch(`https://flask-login-server.azurewebsites.net/update`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,

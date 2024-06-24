@@ -4,8 +4,11 @@ A full stack app using:
 
 React with Javascript + Tailwind CSS
 Libraries Used: 
+
 Shadcn for ui components 
+
 React hook form 
+
 react router dom 
 
 

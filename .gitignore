@@ -6,6 +6,11 @@ frontend/node_modules
 # Ignore api directory
 /api
 
+# Ignore flask files
+/server/venv
+/server/__pycache__
+/server/test.py
+
 # Ignore swa-db-connections directory
 /swa-db-connections
 

@@ -7,7 +7,7 @@ https://proud-wave-0105b8f0f.5.azurestaticapps.net/
 
 -React + Javascript + Tailwind CSS
 
--Redux Toolkil for state management
+-Redux Toolkit for state management
 
 -Shadcn for ui components 
 

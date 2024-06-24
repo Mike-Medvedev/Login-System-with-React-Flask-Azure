@@ -23,10 +23,19 @@ const dataTableSlice = createSlice({
         innerElement => state.dataSource.indexOf(innerElement) != index,
       );
     },
-    addSelectedRow: (state, action) => {
-      const lastId =
-        state.dataSource.length > 0 ? state.dataSource[state.dataSource.length - 1][0] + 1 : 1;
-      state.dataSource.push([lastId, '', '', '', 0]);
+    addNewRow: (state, action) => {
+      state.dataSource.push([null, '', '', '', 0]);
+      const temp = Date.now();
+      state.changesToSubmit = {
+        ...state.changesToSubmit,
+        [temp]: {
+          [`id-${temp}`]: null,
+          [`brand-${temp}`]: '',
+          [`model-${temp}`]: '',
+          [`color-${temp}`]: '',
+          [`year-${temp}`]: 0,
+        },
+      };
     },
     updateSelectedRow: (state, action) => {
       const { index, data } = action.payload;
@@ -60,6 +69,9 @@ const dataTableSlice = createSlice({
         [index]: newObj,
       };
     },
+    resetChanges: state => {
+      state.changesToSubmit = {};
+    },
   },
 });
 
@@ -67,9 +79,10 @@ export const {
   setDataSource,
   setRowState,
   deleteSelectedRow,
-  addSelectedRow,
+  addNewRow,
   updateSelectedRow,
   addChanges,
+  resetChanges,
 } = dataTableSlice.actions;
 
 export default dataTableSlice.reducer;

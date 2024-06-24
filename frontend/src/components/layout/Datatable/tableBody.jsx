@@ -8,7 +8,13 @@ export default function TableBody({ data }) {
 
   function renderEditModeForm(innerGuitarArray, index) {
     if (rowState[index]) {
-      return <EditModeForm index={index} innerGuitarArray={innerGuitarArray} />;
+      return (
+        <EditModeForm
+          index={index}
+          innerGuitarArray={innerGuitarArray}
+          setHoveredRowIndex={setHoveredRowIndex}
+        />
+      );
     } else {
       return (
         <>

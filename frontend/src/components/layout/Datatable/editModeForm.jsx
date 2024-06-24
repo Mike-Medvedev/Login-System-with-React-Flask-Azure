@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Check, X } from 'lucide-react';
 
-export default function EditModeForm({ index, innerGuitarArray }) {
+export default function EditModeForm({ index, innerGuitarArray, setHoveredRowIndex }) {
   const dispatch = useDispatch();
   const [shouldJiggle, setShouldJiggle] = useState(false);
 
@@ -20,6 +20,7 @@ export default function EditModeForm({ index, innerGuitarArray }) {
     dispatch(updateSelectedRow({ index, data: formData }));
     dispatch(addChanges({ data: formData, index: index }));
     dispatch(setRowState(index));
+    setHoveredRowIndex(null);
   }
 
   return (

@@ -16,21 +16,27 @@ export default function Crud({ operation, text, selectedGuitarId, setData, scrol
       case 'CREATE': {
         try {
           setIsLoading(true);
-          const response = await fetch('https://flask-login-server.azurewebsites.net/create', {
-            method: 'POST',
-            headers: {
-              'Content-type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          const response = await fetch(
+            'https://https://flask-login-server.azurewebsites.net/create',
+            {
+              method: 'POST',
+              headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+              },
+              body: JSON.stringify(data),
             },
-            body: JSON.stringify(data),
-          });
+          );
           if (response.ok) {
             try {
-              const refetch = await fetch('https://flask-login-server.azurewebsites.net/guitars', {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+              const refetch = await fetch(
+                'https://https://flask-login-server.azurewebsites.net/guitars',
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+                  },
                 },
-              });
+              );
               const result = await refetch.json();
               setData(result.data);
               setTimeout(() => {
@@ -55,7 +61,7 @@ export default function Crud({ operation, text, selectedGuitarId, setData, scrol
       }
       case 'READ': {
         setIsLoading(true);
-        const read = await fetch('https://flask-login-server.azurewebsites.net/guitars', {
+        const read = await fetch('https://https://flask-login-server.azurewebsites.net/guitars', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
           },
@@ -68,7 +74,7 @@ export default function Crud({ operation, text, selectedGuitarId, setData, scrol
       }
       case 'UPDATE': {
         const update = await fetch(
-          `https://flask-login-server.azurewebsites.net/update/${selectedGuitarId}`,
+          `https://https://flask-login-server.azurewebsites.net/update/${selectedGuitarId}`,
           {
             method: 'PUT',
             headers: {
@@ -85,7 +91,7 @@ export default function Crud({ operation, text, selectedGuitarId, setData, scrol
       case 'DELETE': {
         setIsLoading(true);
         try {
-          const del = await fetch(`https://flask-login-server.azurewebsites.net/delete`, {
+          const del = await fetch(`https://https://flask-login-server.azurewebsites.net/delete`, {
             method: 'DELETE',
             headers: {
               Authorization: `Bearer ${localStorage.getItem('access_token')}`,

@@ -24,13 +24,6 @@ export default function Home() {
         <div className="h-2/3">
           <DataTable />
         </div>
-        <Crud
-          operation={operation}
-          text={text}
-          selectedGuitarId={selectedGuitarId}
-          setData={setGuitars}
-          scrollRef={scrollRef}
-        />
       </div>
     </>
   );

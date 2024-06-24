@@ -2,11 +2,14 @@ import pyodbc
 import json
 from sqlalchemy import create_engine
 import sqlalchemy.pool as pool
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 
 def connect():
-    connectionString = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:guitars.database.windows.net,1433;Database=store;Uid=CloudSA61792ed2;Pwd=vQLcu4zWvKTPgu2;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+    connectionString = os.getenv('DATABASE_URL')
     conn = pyodbc.connect(connectionString)
     return conn
 

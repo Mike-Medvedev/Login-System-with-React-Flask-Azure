@@ -85,7 +85,7 @@ export default function Test() {
   //   const headers = new Headers();
   //   headers.append('content-type', contentType);
 
-  //   const response = await fetch('http://localhost:5000/post', {
+  //   const response = await fetch('https://flask-login-server.azurewebsites.net/post', {
   //     method: 'POST',
   //     body: JSON.stringify({ data: data }),
   //     headers: headers,
